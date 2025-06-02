@@ -1,0 +1,161 @@
+body {
+  font-family: 'Roboto Serif', serif;
+  background-color: #FFECFE;
+  color: #662A4D;
+  margin: 0;
+  padding: 0;
+}
+.main-content {
+    max-width: 1200px;       /* عرض محدود باش المحتوى مركز */
+    margin: 130px auto 40px; /* مسافة فوق باش مايتغطاش من الهيدر الثابت */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+section.formation {
+  border-radius: 20px;
+  padding: 30px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  border: #662A4D solid 3px;
+}
+
+/* Titre formation */
+section.formation h2 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  color: #662A4D;
+  text-align: center;
+}
+
+/* Description */
+section.formation p {
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  margin-left: 75px;
+}
+
+/* Boutons */
+.btns button {
+  background-color: #C3A0C1;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 1em;
+  font-family: 'Roboto Serif', serif;
+  cursor: pointer;
+  border: #662A4D solid 2px;
+  transition: background 0.3s ease;
+}
+.btn{
+ background-color: #C3A0C1;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 1em;
+  font-family: 'Roboto Serif', serif;
+  cursor: pointer;
+  border: #662A4D solid 2px;
+  transition: background 0.3s ease;
+  text-decoration: none;
+}
+ button:hover {
+  background-color: #FFECFE;
+    color: #662A4D;
+}
+
+/* Style tooltip personnalisé */
+.info-icon {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  margin-left: 8px;
+  font-size: 2.4em;       /* agrandi l'icône */
+  color: #662A4D;         /* couleur violette plus douce, à changer selon ton choix */
+  transition: color 0.3s ease;
+}
+
+.info-icon:hover {
+  color: #662A4D;        /* couleur au survol, assortie à ton thème */
+}
+
+
+/* Tooltip for disabled buttons */
+.btn.disabled {
+  pointer-events: none;
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed;
+  border: 1px solid #999;
+  padding: 10px 15px;
+  border-radius: 5px;
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn.disabled:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-size: 0.85em;
+  z-index: 1000;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.btn.disabled:hover::before {
+  content: "";
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.75) transparent transparent transparent;
+  z-index: 1001;
+  opacity: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .btns {
+    flex-direction: column;
+    gap: 15px;
+    margin-right:60px;
+
+  }
+
+  .btns button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .tooltip {
+    top: -110px;
+    font-size: 12px;
+    min-width: 180px;
+  }
+}

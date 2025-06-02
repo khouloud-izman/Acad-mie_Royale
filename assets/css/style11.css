@@ -1,0 +1,168 @@
+/* style11.css */
+
+/* ====== Base ====== */
+body {
+    font-family: 'Roboto Serif', serif;
+    margin: 0;
+    background-color: white;
+}
+
+strong {
+    color: #662A4D;
+}
+
+p {
+    color: black;
+    font-size: 25px;
+    margin: 20px 0 8px 0;
+}
+
+i {
+    margin-right: 10px;
+}
+
+span {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+/* ====== Layout ====== */
+.profil-container {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+
+}
+
+.profil-left {
+    width: 50%;
+    padding: 40px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #4a2b4d;
+    margin-right: 40px;
+}
+
+.profil-right {
+    width: 50%;
+    background-size: cover;
+    background-position: center;
+}
+
+.profil-right img {
+    width: 70%;
+    height: 100vh;
+    object-fit: cover;
+    margin-left: 200px;
+}
+
+/* ====== Buttons ====== */
+.certificat-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.3s;
+    margin-top: 120px;
+    margin-left: 250px;
+    width: fit-content;
+}
+
+.certificat-btn:hover:not(.disabled) {
+    background-color: #45a049;
+}
+
+.certificat-btn.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    width: fit-content;
+    border: #662A4D solid 2px;
+    background-color: #C3A0C1;
+    color: black;
+}
+
+/* ====== Progress Bar ====== */
+.progress-bar {
+    width: 80%;
+    background-color: white;
+    border-radius: 30px;
+    height: 30px;
+    overflow: hidden;
+    margin-top: 5px;
+    border: #662A4D solid 2px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #662A4D;
+    width: 0%;
+    transition: width 0.5s ease-in-out;
+}
+
+/* ====== Extra Styling ====== */
+.para {
+    margin-top: 40px;
+}
+
+.para p,
+.para strong {
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+    .profil-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .profil-left,
+    .profil-right {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .profil-right img {
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+    }
+
+    .certificat-btn,
+    .btn {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .para p,
+    .para strong {
+        font-size: 20px;
+    }
+
+    .progress-bar {
+        height: 30px;
+        width: 100%;
+    }
+
+    .progress {
+        height: 100%;
+    }
+}

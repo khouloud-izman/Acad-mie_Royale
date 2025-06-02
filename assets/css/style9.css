@@ -1,0 +1,102 @@
+.lecon {
+  margin-top: 30px;
+  font-family: 'Roboto Serif', serif;
+  text-align: center;
+
+}
+strong{
+  color: #662A4D;
+  text-decoration: underline solid #662A4D 2px;
+}
+.main-content {
+  max-width: 1200px;
+  margin: 130px auto 40px; /* margin-top = ارتفاع الهيدر + شوية فراغ */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+.media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.image-container img {
+  width: 500px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: block;
+  border: #CD46FF solid 3px;
+  margin-top: 20px;
+
+}
+
+.video-container {
+  display: none;
+  width: 500px;
+  height: 280px;
+  border-radius: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.video-container.active {
+  display: block;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  object-fit: cover;
+  display: block;
+  border: #CD46FF solid 3px;
+  margin-top: 20px;
+
+}
+
+.video-btn {
+  background-color: #C3A0C1;
+  color: white;
+  padding: 8px 16px;
+  border: #662A4D solid 2px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.video-btn:hover {
+  background-color: #A979AB;
+}
+
+/* ✅ MEDIA QUERY 768px */
+@media (max-width: 768px) {
+  .media {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-container img,
+  .video-container {
+    width: 90%; /* باش يكون متناسق مع الموبايل */
+  }
+
+  .video-btn {
+    margin-left: 0;
+  }
+}
