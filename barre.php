@@ -9,16 +9,13 @@ require_once 'includes/db.php';
 
 $user_id = $_SESSION['user_id'];
 
-// جلب عدد الاختبارات اللي نجح فيهم المستخدم (نعتبر النجاح هو score >= 10)
 $sql = "SELECT COUNT(*) FROM test WHERE utilisateur_id = ? AND score >= 10";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$user_id]);
 $passed_tests = $stmt->fetchColumn();
 
-// عدد الاختبارات الكلي
 $total_tests = 3;
 
-// حساب التقدم بالنسبة المئوية
 $progress = intval(($passed_tests / $total_tests) * 100);
 ?>
 

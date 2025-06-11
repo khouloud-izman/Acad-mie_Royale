@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
 session_start();
 $score = $_GET['score'] ?? 0;
 $total = $_GET['total'] ?? 0;
@@ -10,8 +14,12 @@ $pourcentage = $_GET['pourcentage'] ?? 0;
 <head>
     <meta charset="UTF-8">
     <title>Test réussi !</title>
-    <link rel="stylesheet" href="assets/css/style14.css">
+
       <link rel="stylesheet" href="assets/css/style.css" />
+              <link rel="stylesheet" href="assets/css/style4.css">
+
+          <link rel="stylesheet" href="assets/css/style14.css">
+
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif&display=swap" rel="stylesheet">
 
@@ -32,6 +40,9 @@ $pourcentage = $_GET['pourcentage'] ?? 0;
             <button type="submit">Retour aux formations</button>
         </form>
     </div>
+    <br>
+    <br>
+
     <script src="assets/js/script.js"></script>
 
 </body>

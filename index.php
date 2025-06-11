@@ -8,17 +8,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
-
-<section class="hero" style="position: relative;">
-  <div class="header-container" style="position: absolute; top: 0; left: 0; width: 100%; z-index: 200;">
+  <div class="header-container" style="position: absolute; top: -10px; left: 0; width: 100%; z-index: 200;">
     <?php include("includes/header.php"); ?>
   </div>
+
+
+  <section class="hero" style="position: relative;">
+
   
   <section class="slider">
     <div class="slides">
-      <div class="slide active" style="background-image: url('assets/images/slider1.png');"></div>
-      <div class="slide" style="background-image: url('assets/images/slider2.png');"></div>
-      <div class="slide" style="background-image: url('assets/images/slider3.png');"></div>
+      <div class="slide active" style="background-image: url('assets/images/slider1.png'); margin-top:80px"></div>
+      <div class="slide" style="background-image: url('assets/images/slider2.png');margin-top:80px"></div>
+      <div class="slide" style="background-image: url('assets/images/slider3.png');margin-top:80px"></div>
     </div>
     <button class="prev">&#10094;</button>
     <button class="next">&#10095;</button>
@@ -67,7 +69,7 @@
         <img src="assets/images/3.png" alt="Griyech Ikram" />
       </div>
       <div class="texte">
-        <h2>Griyech Ikram</h2>
+        <h2>Zainab Alaoui</h2>
         <h4>Les formations sont bien structurées, et les chefs sont passionnés et très pédagogues. Une belle expérience !</h4>
         <br>
         <div class="stars">

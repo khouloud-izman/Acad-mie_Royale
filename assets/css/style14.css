@@ -14,7 +14,7 @@ body {
 
 .card h1 {
     color: #CD46FF;
-    margin-top: 20px;
+    margin-top: 150px;
     font-size: 2.5em;
 }
 
@@ -63,5 +63,40 @@ color: #662A4D;
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+@media (max-width: 768px) {
+    body {
+        height: auto; 
+        padding: 20px;
+        justify-content: flex-start; 
+    }
+
+    .card h1 {
+        font-size: 2em;
+        margin-top: 150px;
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.6;
+        max-width: 100%;
+        margin-bottom: 15px;
+        padding: 0 10px;
+    }
+
+    strong {
+        font-size: 1.1em;
+    }
+
+    .fa-solid {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    button {
+        padding: 12px 24px;
+        font-size: 0.9em;
+        border-radius: 8px;
     }
 }

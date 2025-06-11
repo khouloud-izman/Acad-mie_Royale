@@ -4,7 +4,6 @@ include('../config/db.php');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// إذا المستخدم مسجل الدخول بالفعل، نوجهوه مباشرة
 if (isset($_SESSION['user_id'])) {
     $redirect_url = 'formations.php';
     if (isset($_GET['redirect']) && !empty($_GET['redirect'])) {
@@ -21,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connecter'])) {
   $email = trim($_POST['email']);
   $pass = $_POST['pass'];
 
-  // تحقق واش الحقول معمرين
   if (empty($email)) {
       $erroremail = '<i class="fas fa-times-circle" style="color:red;"></i> Veuillez remplir ce champ';
   }
@@ -29,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connecter'])) {
       $errorpass = '<i class="fas fa-times-circle" style="color:red;"></i> Veuillez remplir ce champ';
   }
 
-  // إذا ماكانوش أخطاء فالحقول، ندوزو نتحققو من المستخدم
   if (empty($erroremail) && empty($errorpass)) {
       $query = 'SELECT * FROM utilisateur WHERE email = ?';
       $stmt = $pdo->prepare($query);

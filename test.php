@@ -75,8 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <title>Test QCM - <?= htmlspecialchars($formation['titre']) ?></title>
 <link rel="stylesheet" href="assets/css/style10.css">
+<link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 <body>
+
 <div class="container">
 <?php include("includes/header.php"); ?>
 
@@ -90,21 +93,84 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php endif; ?>
 
 <form method="post">
-<div class="labels">
-<?php foreach ($choix as $c): ?>
-  <input type="radio" id="choix<?= $c['choix_id'] ?>" name="choix" value="<?= $c['choix_id'] ?>"
-    <?php 
-      // Garder la sélection si déjà répondue
-      if (isset($_SESSION['reponses'][$formation_id][$question_id]) && $_SESSION['reponses'][$formation_id][$question_id] == $c['choix_id']) 
-          echo 'checked';
-    ?>
-  >
-  <label for="choix<?= $c['choix_id'] ?>"><?= htmlspecialchars($c['choix_texte']) ?></label><br>
-<?php endforeach; ?>
-</div>
+  <div class="labels">
+  <?php foreach ($choix as $c): ?>
+    <input type="radio" id="choix<?= $c['choix_id'] ?>" name="choix" value="<?= $c['choix_id'] ?>"
+      <?php 
+        if (isset($_SESSION['reponses'][$formation_id][$question_id]) && $_SESSION['reponses'][$formation_id][$question_id] == $c['choix_id']) 
+            echo 'checked';
+      ?>
+    >
+    <label for="choix<?= $c['choix_id'] ?>"><?= htmlspecialchars($c['choix_texte']) ?></label>
+  <?php endforeach; ?>
+  </div>
 
 <button type="submit"><?= $page == $total ? 'Valider mes réponses' : 'Suivant' ?></button>
 </form>
+<button id="btnQuit">Quitter le test</button>
+
+
+
+<div id="confirmModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <p>Êtes-vous sûr de vouloir quitter le test ?
+        <br> Votre progression sera perdue.</p>
+    <button id="confirmYes">Oui</button>
+    <button id="confirmNo">Non</button>
+  </div>
 </div>
+
+</div>
+
+<script src="assets/js/script.js"></script>
+<script src="assets/js/script4.js"></script>
+
+<script>
+  const btnQuit = document.getElementById('btnQuit');
+  const modal = document.getElementById('confirmModal');
+  const btnYes = document.getElementById('confirmYes');
+  const btnNo = document.getElementById('confirmNo');
+
+  btnQuit.addEventListener('click', () => {
+    modal.style.display = 'flex';  
+  });
+
+  btnNo.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  btnYes.addEventListener('click', () => {
+    fetch('test_quit.php?formation_id=<?= $formation_id ?>', { method: 'POST' })
+      .then(() => {
+        window.location.href = 'index.php'; 
+      });
+  });
+
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.style.display = 'flex';
+
+      btnYes.onclick = () => {
+        fetch('test_quit.php?formation_id=<?= $formation_id ?>', { method: 'POST' })
+          .then(() => {
+            window.location.href = link.href;
+          });
+      };
+
+      btnNo.onclick = () => {
+        modal.style.display = 'none';
+      };
+    });
+  });
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
 </body>
 </html>

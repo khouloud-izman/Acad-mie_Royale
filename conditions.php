@@ -7,7 +7,6 @@ if ($formation_id <= 0) {
     die("Formation non spécifiée ou invalide.");
 }
 
-// récupérer les infos de la formation pour affichage éventuel
 $sql = "SELECT * FROM formation WHERE formation_id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$formation_id]);
@@ -49,16 +48,19 @@ if (!$formation) {
 
   <div class="condition">
     <span class="condition-title">3. Repassage possible :</span><br>
-    En cas d’échec, vous aurez la possibilité de repasser le test ultérieurement.
-  </div>
+    En cas d’échec, une seule tentative supplémentaire est autorisée, y compris immédiatement après.
+
+</div>
 
   <div class="condition">
     <span class="condition-title">4. Certificat disponible :</span><br>
-    Une fois les 3 test réussi, votre certificat sera disponible dans de votre profil.
-  </div>
+    Une fois que tous les tests sont réussis, votre certificat sera disponible dans la section "Mon profil", via un bouton dédié.
+
+</div>
 
 <a href="test.php?formation_id=<?= urlencode($_GET['formation_id']) ?>&page=1" class="start-btn">Commencez le test</a>
 </div>
+<script src="assets/js/script.js"></script>
 
 </body>
 </html>

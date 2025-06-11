@@ -6,8 +6,8 @@ body {
   padding: 0;
 }
 .main-content {
-    max-width: 1200px;       /* عرض محدود باش المحتوى مركز */
-    margin: 130px auto 40px; /* مسافة فوق باش مايتغطاش من الهيدر الثابت */
+    max-width: 1200px;       
+    margin: 130px auto 40px; 
     padding: 20px;
     box-sizing: border-box;
   }
@@ -22,7 +22,6 @@ section.formation {
   border: #662A4D solid 3px;
 }
 
-/* Titre formation */
 section.formation h2 {
   font-size: 1.8em;
   margin-bottom: 10px;
@@ -30,7 +29,6 @@ section.formation h2 {
   text-align: center;
 }
 
-/* Description */
 section.formation p {
   font-size: 1em;
   margin-bottom: 20px;
@@ -46,7 +44,6 @@ section.formation p {
   margin-left: 75px;
 }
 
-/* Boutons */
 .btns button {
   background-color: #C3A0C1;
   color: white;
@@ -77,25 +74,24 @@ section.formation p {
     color: #662A4D;
 }
 
-/* Style tooltip personnalisé */
 .info-icon {
   cursor: pointer;
   position: relative;
   display: inline-block;
   font-weight: bold;
   margin-left: 8px;
-  font-size: 2.4em;       /* agrandi l'icône */
-  color: #662A4D;         /* couleur violette plus douce, à changer selon ton choix */
+  font-size: 2.4em;     
+  color: #662A4D;         
   transition: color 0.3s ease;
 }
 
 .info-icon:hover {
-  color: #662A4D;        /* couleur au survol, assortie à ton thème */
+  color: #662A4D;      
 }
 
 
 /* Tooltip for disabled buttons */
-.btn.disabled {
+/* .btn.disabled {
   pointer-events: none;
   background-color: #ccc !important;
   color: #666 !important;
@@ -138,8 +134,18 @@ section.formation p {
   z-index: 1001;
   opacity: 1;
   pointer-events: none;
-}
-
+} */
+.btns a.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  
 @media (max-width: 768px) {
   .btns {
     flex-direction: column;

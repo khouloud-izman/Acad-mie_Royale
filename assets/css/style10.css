@@ -66,6 +66,11 @@ label {
 
 .labels {
     margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+    width: 100%;
+    margin: 50px auto 0 auto;
 }
 
 label:hover {
@@ -108,6 +113,102 @@ button:hover {
     font-weight: bold;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    font-family: 'Roboto Serif', serif;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: auto;
+    max-width: 200%;  
+}
+
+.modal-content p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    color: #662A4D;
+    width: 100%;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 350px;
+}
+
+.btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    flex: 1;
+}
+
+.btn.yes {
+    background-color: #C3A0C1;
+    color: white;
+    border: #662A4D solid 2px;
+}
+
+.btn.yes:hover {
+    background-color: #9c36cc;
+}
+
+.btn.no {
+    background-color: #C3A0C1;
+    color: white;
+    border: #662A4D solid 2px;
+}
+
+.btn.no:hover {
+    background-color: #9b819c;
+}
+
+#btnQuit {
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Roboto Serif', serif;
+    transition: background-color 0.3s ease;
+    width: 200px;
+    background-color: #C3A0C1;
+    border: #662A4D solid 2px;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    margin-top: -10px;
+}
+#btnQuit:hover{
+    background-color: #FFECFE;
+    color: #662A4D;
+}
 @media (max-width: 768px) {
     body {
         padding: 10px;
@@ -116,7 +217,7 @@ button:hover {
     }
 
     .container {
-        margin-top: 30px;
+        margin-top: 100px;
         max-width: 100%;
         padding: 15px;
     }
@@ -128,7 +229,7 @@ button:hover {
 
     p {
         font-size: 20px;
-        white-space: normal;
+        white-space: normal; 
         overflow-x: visible;
         width: 100%;
         text-align: center;
@@ -141,9 +242,43 @@ button:hover {
         padding: 10px;
     }
 
+    .labels {
+        grid-template-columns: 1fr;
+        gap: 10px 0;
+    }
+
     button {
         width: 70%;
         font-size: 16px;
         padding: 12px;
+        margin: 15px auto;
+    }
+
+    .modal-content {
+        width: 90%;
+        max-height: 70vh;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .modal-content p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .modal-buttons {
+        flex-direction: column; 
+        gap: 15px;
+        max-width: 100%;
+    }
+
+    .btn {
+        width: 60%;
+        flex: none;
+    }
+    #btnQuit{
+        width: 70%;
+        flex: none; 
+
     }
 }

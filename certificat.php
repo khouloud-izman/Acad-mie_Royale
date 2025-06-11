@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'config/db.php';
 
-// Récupérer le prénom et nom depuis la base de données
 $utilisateur_id = $_SESSION['user_id'];
 
 $stmt = $pdo->prepare("SELECT prenom, nom FROM utilisateur WHERE utilisateur_id = ?");
@@ -21,26 +20,40 @@ if (!$user) {
 
 $prenom = htmlspecialchars($user['prenom']);
 $nom = htmlspecialchars($user['nom']);
+$nom_complet = $prenom . ' ' . $nom;
+$date_du_jour = date('d/m/Y');
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style17.css">
     <title>Certificat de réussite</title>
-    <link rel="stylesheet" href="assets/css/certificat.css"> <!-- CSS li kayn f design dyalk -->
+
 </head>
 <body>
 
-<div class="certificat-container">
-    <h1>🎓 Certificat de Réussite</h1>
+<div class="contenu-certificat">
+<img src="assets/images/logo.png" alt="Logo de l'académie" class="logo-certificat">
 
-    <p>Ce certificat atteste que <strong><?= $prenom ?> <?= $nom ?></strong> a complété avec succès
-    le programme de formation en pâtisserie, faisant preuve
+    <h1>Académie Royale de Pâtisserie</h1>
+
+    <p>Ce certificat atteste que <span class="nom-beneficiaire"><?= $nom_complet ?></span> a complété avec succès<br>
+    le programme de formation de notre Acâdemie , faisant preuve<br>
     d’excellence et de professionnalisme.</p>
+</div>
 
-    <p>Date : <?= date('d/m/Y') ?></p>
-    <p>Signature : ____________________</p>
+<div class="footer-infos">
+    <div class="date">
+        <p>La Date</p>
+        <p>Le <?= $date_du_jour ?></p>
+    </div>
+    <div class="signature">
+        <p>La Directeure Générale</p>
+        <p class="signature-name">A. Hamilton</p>
+    </div>
 </div>
 
 </body>
