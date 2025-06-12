@@ -1,8 +1,9 @@
 <?php
 include 'config/db.php';
-session_start();
 
-$user_id = $_SESSION['user_id'] ?? null;  // Hna ndirna 'user_id' bach nwaf9o m3a script dyalek dyal test
+session_start();
+$user_id = $_SESSION['user_id'] ?? null;
+$tests_quit = $_SESSION['tests_quit'] ?? [];
 
 $stmt = $pdo->query('SELECT * FROM formation');
 $formations = $stmt->fetchAll();
@@ -14,6 +15,8 @@ $formations = $stmt->fetchAll();
 <head>
   <meta charset="UTF-8">
   <title>Formations - Académie Royale</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
   <link rel="stylesheet" href="assets/css/style8.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -35,17 +38,22 @@ $formations = $stmt->fetchAll();
     $test_info = $stmt_test->fetch();
 
     if ($test_info) {
-      $score = (int)$test_info['score'];
-      $date_formatted = date('d/m/Y', strtotime($test_info['date_passée']));
-      $tooltip = "Test passé le $date_formatted avec un score de {$score}%";
-
-      if ($score >= 50) {
-        $test_status = 'success';
-      } else {
-        $test_status = 'fail';
-      }
+        $score = (int)$test_info['score'];
+        $date_formatted = date('d/m/Y', strtotime($test_info['date_passée']));
+        $tooltip = "Test passé le $date_formatted avec un score de {$score}%";
+    
+        if ($score >= 50) {
+            $test_status = 'success';
+        } else {
+            $test_status = 'fail';
+        }
     }
-  }
+    
+    if (isset($tests_quit[$formation['formation_id']]) && $test_status === 'not_passed') {
+        $test_status = 'quit';
+        $tooltip = "Test quitté sans être terminé.";
+    }
+}   
 ?>
 
 <section class="formation">
@@ -56,24 +64,36 @@ $formations = $stmt->fetchAll();
   <p><?= htmlspecialchars($formation['description']) ?></p>
   <div class="btns">
     <a href="lecons.php?formation_id=<?= $formation['formation_id'] ?>" class="btn">Accéder aux leçons</a>
-
     <?php if ($test_status === 'success'): ?>
-      <span class="btn disabled" title="<?= htmlspecialchars($tooltip) ?>" style="opacity: 0.7; cursor: not-allowed;"><i class="fas fa-check"></i>
- Test déjà passé</span>
-    <?php elseif ($test_status === 'fail'): ?>
-      <a href="#" class="btn disabled" title="<?= htmlspecialchars($tooltip) ?>" style="background-color: #ff5e5e; cursor: not-allowed; opacity: 0.7;"><i class="fas fa-times"></i>
- Échec du test</a>
-    <?php else: ?>
-      <a href="conditions.php?formation_id=<?= $formation['formation_id'] ?>" class="btn">Passer le test</a>
-    <?php endif; ?>
+  <a href="#" class="btn" style="background-color: #28a745; color: white; cursor: default; pointer-events: none; opacity: 0.5;">
+    <i class="fas fa-check" style="color: white; opacity: 1;"></i> Test déjà passé
+  </a>
+  <i class="fas fa-info-circle" title="<?= htmlspecialchars($tooltip) ?>" style="color: #662A4D; cursor: help;"></i>
 
-    <span class="info-icon" title="<?= htmlspecialchars($tooltip) ?>">ℹ</span>
+<?php elseif ($test_status === 'fail'): ?>
+  <a href="#" class="btn" style="background-color: red; color: white; cursor: default; pointer-events: none; opacity: 0.5;">
+    <i class="fas fa-times" style="color: white; opacity: 1;"></i> Échec du test
+  </a>
+  <i class="fas fa-info-circle" title="<?= htmlspecialchars($tooltip) ?>" style="color: #662A4D; cursor: help;"></i>
+
+<?php elseif ($test_status === 'quit'): ?>
+  <a href="#" class="btn" style="background-color: #696969	; color: white; cursor: default; pointer-events: none; opacity: 0.5;">
+    <i class="fas fa-ban" style="color: white; opacity: 1;"></i> Test perdu (abandonné)
+  </a>
+  <i class="fas fa-info-circle" title="<?= htmlspecialchars($tooltip) ?>" style="color: #662A4D; cursor: help;"></i>
+
+<?php else: ?>
+  <a href="conditions.php?formation_id=<?= $formation['formation_id'] ?>" class="btn">
+    Passer le test
+  </a>
+<?php endif; ?>
+
+
   </div>
 </section>
 
+
 <?php endforeach; ?>
-
-
 
 </div>
 

@@ -71,7 +71,6 @@ a.btn {
     margin-top: 25px;
 }
 
-/* Responsive for screens ≤ 768px */
 @media (max-width: 768px) {
     .form-container {
         max-width: 90%;

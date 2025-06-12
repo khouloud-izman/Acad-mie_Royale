@@ -10,7 +10,7 @@ strong{
 }
 .main-content {
   max-width: 1200px;
-  margin: 130px auto 40px; /* margin-top = ارتفاع الهيدر + شوية فراغ */
+  margin: 130px auto 40px; 
   padding: 20px;
   box-sizing: border-box;
 }
@@ -84,7 +84,6 @@ strong{
   background-color: #A979AB;
 }
 
-/* ✅ MEDIA QUERY 768px */
 @media (max-width: 768px) {
   .media {
     flex-direction: column;
@@ -93,7 +92,7 @@ strong{
 
   .image-container img,
   .video-container {
-    width: 90%; /* باش يكون متناسق مع الموبايل */
+    width: 90%; 
   }
 
   .video-btn {

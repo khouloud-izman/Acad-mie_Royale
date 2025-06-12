@@ -39,21 +39,21 @@ $certificat_disponible = ($progress === 100 && $tests_reussis === $totalFormatio
     <title>Mon Profil - Pâtisserie Gourmandine</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/style11.css">
-    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <div class="profil-container">
     <div class="profil-left">
         <?php if ($certificat_disponible): ?>
-            <a class="certificat-btn" href="certificat.php">📄 Télécharger mon certificat</a>
+            <a class="certificat-btn" href="certificat.php"><i class="fa-solid fa-file" style="font-size: 30px; color: white;"></i>
+ Afficher mon certificat</a>
         <?php else: ?>
-            <a class="certificat-btn disabled" onclick="alert('Vous devez terminer toutes les formations et réussir les tests pour télécharger le certificat.')" style="cursor:not-allowed; opacity:0.5;">📄 Télécharger mon certificat</a>
+            <a class="certificat-btn disabled" onclick="alert('Vous devez terminer toutes les formations et réussir les tests pour télécharger le certificat.')" style="cursor:not-allowed; opacity:0.5;"> <i class="fa-solid fa-file" style="font-size: 30px; color: white;"></i>Afficher mon certificat</a>
         <?php endif; ?>
         <?php include("includes/header.php"); ?>
 
-        <!-- Bouton certificat -->
-        
+
 
         <div class="para">
             <p><strong>Nom :</strong> <?= htmlspecialchars($_SESSION['user_nom']) ?></p>
@@ -68,8 +68,10 @@ $certificat_disponible = ($progress === 100 && $tests_reussis === $totalFormatio
         <span><?= $progress ?>%</span>
 
         <br><br>
+        <div class="flex">
         <a class="btn" href="auth/change_password.php"><i class="fas fa-user-lock"></i>Modifier le mot de passe</a>
         <a class="btn" href="auth/logout.php"><i class="fas fa-sign-out-alt"></i>Se déconnecter</a>
+        </div>
     </div>
 
     <div class="profil-right">

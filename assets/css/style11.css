@@ -1,6 +1,4 @@
-/* style11.css */
 
-/* ====== Base ====== */
 body {
     font-family: 'Roboto Serif', serif;
     margin: 0;
@@ -27,7 +25,6 @@ span {
     font-size: 12px;
 }
 
-/* ====== Layout ====== */
 .profil-container {
     display: flex;
     height: fit-content;
@@ -44,6 +41,7 @@ span {
     justify-content: center;
     color: #4a2b4d;
     margin-right: 40px;
+    margin-top: -30px;
 }
 
 .profil-right {
@@ -59,9 +57,8 @@ span {
     margin-left: 200px;
 }
 
-/* ====== Buttons ====== */
 .certificat-btn {
-    background-color: #4CAF50;
+    background-color: #CD46FF;
     color: white;
     padding: 12px 20px;
     text-decoration: none;
@@ -69,13 +66,13 @@ span {
     font-weight: bold;
     display: inline-block;
     transition: 0.3s;
-    margin-top: 120px;
+    margin-top: 100px;
     margin-left: 250px;
-    width: fit-content;
+    width: 60%;
 }
 
 .certificat-btn:hover:not(.disabled) {
-    background-color: #45a049;
+    background-color: #CD46FF;
 }
 
 .certificat-btn.disabled {
@@ -96,8 +93,10 @@ span {
     background-color: #C3A0C1;
     color: black;
 }
-
-/* ====== Progress Bar ====== */
+.btn:hover{
+    background-color: #FFECFE;
+    color: #662A4D;
+}
 .progress-bar {
     width: 80%;
     background-color: white;
@@ -115,7 +114,6 @@ span {
     transition: width 0.5s ease-in-out;
 }
 
-/* ====== Extra Styling ====== */
 .para {
     margin-top: 40px;
 }
@@ -125,18 +123,22 @@ span {
     font-size: 25px;
     margin-top: 20px;
 }
+.flex{
+    display: flex;
+    gap: 40px;
+}
 
-/* ====== Responsive Design ====== */
 @media (max-width: 768px) {
     .profil-container {
         flex-direction: column;
-        height: auto;
+        width: 95vw;
     }
 
     .profil-left,
     .profil-right {
         width: 100%;
-        padding: 20px;
+        margin: 0;
+        padding: 15px;
     }
 
     .profil-right img {
@@ -145,24 +147,27 @@ span {
         margin-left: 0;
     }
 
-    .certificat-btn,
+    .certificat-btn {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 200px;
+        padding: 10px 15px;
+        font-size: 18px;
+    }
+
+    p, .para p, .para strong {
+        font-size: 18px;
+    }
+
     .btn {
         width: 100%;
         text-align: center;
-        margin-left: 0;
+        padding: 12px 15px;
     }
 
-    .para p,
-    .para strong {
-        font-size: 20px;
-    }
-
-    .progress-bar {
-        height: 30px;
-        width: 100%;
-    }
-
-    .progress {
-        height: 100%;
+    .flex {
+        flex-direction: column;
+        gap: 20px;
     }
 }
+

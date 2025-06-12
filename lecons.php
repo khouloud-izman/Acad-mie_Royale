@@ -66,7 +66,7 @@ $lecons = $stmt->fetchAll();
     </section>
   <?php endforeach; ?>
 
-</div> <!-- نهاية div.main-content -->
+</div> 
 
 <?php include("includes/footer.php"); ?>
 

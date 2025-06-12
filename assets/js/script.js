@@ -1,4 +1,4 @@
-  document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const slides = document.querySelectorAll('.slide');
   const prevBtn = document.querySelector('.prev');
   const nextBtn = document.querySelector('.next');
@@ -14,28 +14,26 @@
     });
   }
 
-  prevBtn.addEventListener('click', () => {
+  prevBtn?.addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + slides.length) % slides.length;
     showSlide(currentIndex);
   });
 
-  nextBtn.addEventListener('click', () => {
+  nextBtn?.addEventListener('click', () => {
     currentIndex = (currentIndex + 1) % slides.length;
     showSlide(currentIndex);
   });
 
-});
-//menu burger
-document.addEventListener("DOMContentLoaded", function () {
+  // Menu burger
   const burger = document.querySelector('.burger');
   const navLinks = document.querySelector('.nav-links');
   const closeBtn = document.querySelector('.close-btn');
 
-  burger.addEventListener('click', () => {
+  burger?.addEventListener('click', () => {
     navLinks.classList.add('open');
   });
 
-  closeBtn.addEventListener('click', () => {
+  closeBtn?.addEventListener('click', () => {
     navLinks.classList.remove('open');
   });
 });

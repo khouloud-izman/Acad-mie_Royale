@@ -3,10 +3,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 include('../config/db.php');
 
-// Variables des champs
 $nom = $prenom = $email = $telephone = $password = $confirm_password = '';
 
-// Variables des erreurs
 $nom_error = $prenom_error = $email_error = $telephone_error = $password_error = $confirm_password_error = '';
 $success = '';
 
@@ -18,14 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
-    // Validation
-    if (empty($nom) || strlen($nom) < 2) {
-      $nom_error = 'Le nom est requis et doit contenir au moins 2 caractères.';
-    }
+if (empty($nom) || strlen($nom) < 2 || !preg_match('/^[a-zA-ZÀ-ÿ\-\'\s]+$/u', $nom)) {
+    $nom_error = 'Le nom est requis et doit contenir au moins 2 lettres sans chiffres.';
+}
 
-    if (empty($prenom) || strlen($prenom) < 2) {
-        $prenom_error = "Le prénom est requis et doit contenir au moins 2 caractères.";
-    }
+
+ if (empty($prenom) || strlen($prenom) < 2 || !preg_match('/^[a-zA-ZÀ-ÿ\-\'\s]+$/u', $prenom)) {
+    $prenom_error = "Le prénom est requis et doit contenir au moins 2 lettres sans chiffres.";
+}
+
 
     if (empty($email)) {
         $email_error = "L'adresse e-mail est obligatoire.";
@@ -39,9 +38,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $telephone_error = "Le téléphone doit contenir exactement 10 chiffres.";
     }
 
-    if (empty($password) || strlen($password) < 6) {
-        $password_error = "Le mot de passe est requis (minimum 6 caractères).";
-    }
+  if (empty($password)) {
+    $password_error = "Le mot de passe est requis.";
+} elseif (strlen($password) < 6) {
+    $password_error = "Le mot de passe doit contenir au moins 6 caractères.";
+} elseif (
+    !preg_match('/[A-Z]/', $password) ||   // Pas de majuscule
+    !preg_match('/[a-z]/', $password) ||   // Pas de minuscule
+    !preg_match('/[0-9]/', $password)      // Pas de chiffre
+) {
+    $password_error = "Le mot de passe doit contenir au moins une lettre majuscule, une minuscule et un chiffre.";
+}
+
 
     if (empty($confirm_password)) {
       $confirm_password_error = "La confirmation du mot de passe est requise.";
@@ -49,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $confirm_password_error = "Les mots de passe ne correspondent pas.";
     }
 
-    // Vérification email déjà utilisé
     if (empty($nom_error) && empty($prenom_error) && empty($email_error) && empty($telephone_error) && empty($password_error) && empty($confirm_password_error)) {
         $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE email = :email");
         $stmt->bindParam(':email', $email);
@@ -59,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Enregistrement
     if (empty($nom_error) && empty($prenom_error) && empty($email_error) && empty($telephone_error) && empty($password_error) && empty($confirm_password_error)) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO utilisateur (nom, prenom, email, numéro_de_téléphone, mot_de_passe) 
@@ -72,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':mot_de_passe', $hashed_password);
 
         if ($stmt->execute()) {
-          header("Location: ../formations.php");
+          header("Location: login.php");
           exit;
         } else {
           $email_error = "❌ Une erreur s'est produite lors de l'inscription.";
