@@ -38,9 +38,18 @@ if (empty($nom) || strlen($nom) < 2 || !preg_match('/^[a-zA-ZÀ-ÿ\-\'\s]+$/u', 
         $telephone_error = "Le téléphone doit contenir exactement 10 chiffres.";
     }
 
-    if (empty($password) || strlen($password) < 6) {
-        $password_error = "Le mot de passe est requis (minimum 6 caractères).";
-    }
+  if (empty($password)) {
+    $password_error = "Le mot de passe est requis.";
+} elseif (strlen($password) < 6) {
+    $password_error = "Le mot de passe doit contenir au moins 6 caractères.";
+} elseif (
+    !preg_match('/[A-Z]/', $password) ||   // Pas de majuscule
+    !preg_match('/[a-z]/', $password) ||   // Pas de minuscule
+    !preg_match('/[0-9]/', $password)      // Pas de chiffre
+) {
+    $password_error = "Le mot de passe doit contenir au moins une lettre majuscule, une minuscule et un chiffre.";
+}
+
 
     if (empty($confirm_password)) {
       $confirm_password_error = "La confirmation du mot de passe est requise.";
