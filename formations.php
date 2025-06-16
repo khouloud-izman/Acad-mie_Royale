@@ -87,6 +87,7 @@ $formations = $stmt->fetchAll();
   <a href="conditions.php?formation_id=<?= $formation['formation_id'] ?>" class="btn">
     Passer le test
   </a>
+  <i class="fas fa-info-circle" title="<?= htmlspecialchars($tooltip) ?>" style="color: #662A4D; cursor: help;"></i>
 <?php endif; ?>
 
 
