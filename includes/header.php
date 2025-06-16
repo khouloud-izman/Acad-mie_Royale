@@ -25,7 +25,7 @@
     </div>
 
     <ul class="nav-links">
-      <li><a href="/academie_royale/index.php" class="nav-link">Accueil</a></li>
+      <li><a href="/academie_royale/index.php" class="nav-link">Acceuil</a></li>
       <li><a href="/academie_royale/about.php" class="nav-link">À propos</a></li>
       <li><a href="/academie_royale/index.php#temoignages" class="nav-link">Témoignages</a></li>
 

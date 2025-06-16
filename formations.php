@@ -3,7 +3,12 @@
 include 'config/db.php';
 
 session_start();
-$user_id = $_SESSION['user_id'] ?? null;
+if (!isset($_SESSION['user_id'])) {
+  header('Location: auth/login.php');
+  exit();
+}
+
+$user_id = $_SESSION['user_id'];
 $tests_quit = $_SESSION['tests_quit'] ?? [];
 
 $stmt = $pdo->query('SELECT * FROM formation');

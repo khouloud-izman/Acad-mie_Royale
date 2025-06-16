@@ -23,6 +23,11 @@ $prenom = htmlspecialchars($user['prenom']);
 $nom = htmlspecialchars($user['nom']);
 $nom_complet = $prenom . ' ' . $nom;
 $date_du_jour = date('d/m/Y');
+
+// Si la date du certificat est NULL, on la met à la date d'aujourd'hui
+$stmt = $pdo->prepare("UPDATE utilisateur SET certificat_date = CURDATE() WHERE utilisateur_id = ? AND certificat_date IS NULL");
+$stmt->execute([$utilisateur_id]);
+
 ?>
 
 <!DOCTYPE html>
