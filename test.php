@@ -6,10 +6,12 @@ session_start();
 require_once 'config/db.php';
 
 // Récupérer l'ID de la formation depuis l'URL, sinon 0
-$formation_id = isset($_GET['formation_id']) && is_numeric($_GET['formation_id']) ? (int)$_GET['formation_id'] : 0;
-if ($formation_id <= 0) {
-    die("Formation non spécifiée ou invalide.");
+if (isset($_GET['formation_id']) && is_numeric($_GET['formation_id'])) {
+  $formation_id = (int)$_GET['formation_id'];
+} else {
+  die("Formation non spécifiée ou invalide.");
 }
+
 
 // Récupérer infos formation (titre, niveau)
 $sql_formation = "SELECT titre, niveau FROM formation WHERE formation_id = ?";

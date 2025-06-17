@@ -58,7 +58,7 @@ if (!$formation) {
 
 </div>
 
-<a href="test.php?formation_id=<?= urlencode($_GET['formation_id']) ?>&page=1" class="start-btn">Commencez le test</a>
+<a href="test.php?formation_id=<?=($_GET['formation_id']) ?>&page=1" class="start-btn">Commencez le test</a>
 </div>
 <script src="assets/js/script.js"></script>
 

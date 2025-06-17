@@ -11,7 +11,7 @@
 <body>
 
   <div class="merci-container">
-<h1>Merci pour votre message ! <i class="fas fa-heart" style="color:#CD46FF;"></i></h1>
+<h1>Merci pour votre message ! <i class="fas fa-heart" style="color:#FF0000;"></i></h1>
 <p>Nous vous répondrons dans les plus brefs délais. <i class="fas fa-envelope-open-text" style="color:#C3A0C1; font-size:32px;"></i></p>
     <a href="index.php">Retour à l'accueil</a>
   </div>
