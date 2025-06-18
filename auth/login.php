@@ -75,10 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connecter'])) {
       </div>
 
       <form class="form-side" action="login.php<?php if (isset($_GET['redirect'])) echo '?redirect=' . htmlspecialchars($_GET['redirect']); ?>" method="post">
-        <span style="color:red"><?= $erroremail ?></span><br>
+        <span style="color:red;font-weight: bold;"><?= $erroremail ?></span><br>
         <input type="email" name="email" placeholder="Entrez votre Adresse e-mail" value="<?= htmlspecialchars($email) ?>"><br><br>
 
-        <span style="color:red"><?= $errorpass ?></span><br>
+        <span style="color:red; font-weight: bold;"><?= $errorpass ?></span><br>
         <input type="password" name="pass" placeholder="Entrez votre Mot de passe"><br><br>
 
         <div class="a">
