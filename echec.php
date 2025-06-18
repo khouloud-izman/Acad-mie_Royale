@@ -1,27 +1,39 @@
 <?php
 require_once 'config/db.php';
 session_start();
+if (isset($_GET['formation_id'])) {
+    $formation_id = $_GET['formation_id'];
+} else {
+    $formation_id = 0;
+}
 
-$formation_id = $_GET['formation_id'] ?? 0;
-$utilisateur_id = $_SESSION['user_id'] ?? 0;
+if (isset($_SESSION['user_id'])) {
+    $utilisateur_id = $_SESSION['user_id'];
+} else {
+    $utilisateur_id = 0;
+}
+
 
 $tentative = 0;
 $tentative_dispo = false;
+$max_tentatives = 2;
 
 if ($formation_id && $utilisateur_id) {
     $stmt = $pdo->prepare("SELECT tentative FROM test WHERE utilisateur_id = ? AND formation_id = ?");
     $stmt->execute([$utilisateur_id, $formation_id]);
-    $tentative = $stmt->fetchColumn() ?: 0;
-
-    if ($tentative >= 2) {
+    $tentative = $stmt->fetchColumn();
+if (!$tentative) {
+    $tentative = 0;
+}
+    if ($tentative >= $max_tentatives) {
         header("Location: formations.php");
         exit();
     } else {
         $tentative_dispo = true;
     }
 }
+$tentatives_restantes = $max_tentatives - $tentative;
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -32,24 +44,21 @@ if ($formation_id && $utilisateur_id) {
 
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
-        <link rel="stylesheet" href="assets/css/style16.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style16.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif&display=swap" rel="stylesheet" />
 
 </head>
 <body>
-            <?php include("includes/header.php"); ?>
+    <?php include("includes/header.php"); ?>
 
     <div class="card">
-
         <h1><i class="bi bi-exclamation-triangle-fill" style="color: orange;"></i> Résultat insuffisant</h1>
 
         <p>Vous avez obtenu un score en dessous de <strong class="red">50%</strong></p>
         <p>Ne vous découragez pas ! Chaque erreur est une occasion d’apprendre.</p>
         <p>Prenez le temps de consolider vos connaissances,<br>puis retentez le test lorsque vous vous sentirez prêt(e)</p>
         <p><strong>Vous pouvez le faire !</strong></p>
-        <p><strong style="color:red; font-size:15px">(Il reste  <?= $tentative ?> tentative)</strong> </p>
-
+        <p><strong style="color:red; font-size:15px">(Il reste <?= $tentatives_restantes ?> tentative<?= $tentatives_restantes > 1 ? 's' : '' ?>)</strong></p>
 
         <div class="button-container">
             <?php if ($tentative_dispo): ?>
@@ -63,6 +72,5 @@ if ($formation_id && $utilisateur_id) {
     </div>
 
     <script src="assets/js/script.js"></script>
-
 </body>
 </html>

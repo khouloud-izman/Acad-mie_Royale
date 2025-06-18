@@ -1,14 +1,25 @@
-
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
 session_start();
-$score = $_GET['score'] ?? 0;
-$total = $_GET['total'] ?? 0;
-$pourcentage = $_GET['pourcentage'] ?? 0;
+
+if (isset($_GET['score'])) {
+    $score = $_GET['score'];
+} else {
+    $score = 0;
+}
+
+if (isset($_GET['total'])) {
+    $total = $_GET['total'];
+} else {
+    $total = 0;
+}
+
+if (isset($_GET['pourcentage'])) {
+    $pourcentage = $_GET['pourcentage'];
+} else {
+    $pourcentage = 0;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
