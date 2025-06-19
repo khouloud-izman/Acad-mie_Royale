@@ -2,10 +2,15 @@
 session_start();
 require_once 'config/db.php';
 
-$formation_id = isset($_GET['formation_id']) && is_numeric($_GET['formation_id']) ? (int)$_GET['formation_id'] : 0;
-if ($formation_id <= 0) {
-    die("Formation non spécifiée ou invalide.");
+if (isset($_GET['formation_id']) && is_numeric($_GET['formation_id'])) {
+  $formation_id = (int)$_GET['formation_id'];
+  if ($formation_id <= 0) {
+      die("Formation non spécifiée ou invalide.");
+  }
+} else {
+  die("Formation non spécifiée ou invalide.");
 }
+
 
 $sql = "SELECT * FROM formation WHERE formation_id = ?";
 $stmt = $pdo->prepare($sql);

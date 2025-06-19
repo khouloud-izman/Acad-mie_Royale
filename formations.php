@@ -44,22 +44,21 @@ $formations = $stmt->fetchAll();
     $test_info = $stmt_test->fetch();
 
     if ($test_info) {
-        $score = (int)$test_info['score'];
-        $date_formatted = date('d/m/Y', strtotime($test_info['date_passée']));
-        $tooltip = "Test passé le $date_formatted avec un score de {$score}%";
-    
-        if ($score >= 50) {
-            $test_status = 'success';
-        } else {
-            $test_status = 'fail';
-        }
-    }
-    
-    if (isset($tests_quit[$formation['formation_id']]) && $test_status === 'not_passed') {
-        $test_status = 'quit';
-        $tooltip = "Test quitté sans être terminé.";
-    }
-}   
+      $score = (int)$test_info['score'];
+      $date_formatted = date('d/m/Y', strtotime($test_info['date_passée']));
+  
+      if ($score >= 50) {
+          $test_status = 'success';
+          $tooltip = "Test réussi le $date_formatted avec un score de {$score}%";
+      } elseif ($score === 0) {
+          $test_status = 'quit';
+          $tooltip = "Test abandonné (score 0) le $date_formatted.";
+      } else {
+          $test_status = 'fail';
+          $tooltip = "Test échoué le $date_formatted avec un score de {$score}%";
+      }
+  }
+  }  
 ?>
 
 <section class="formation">
