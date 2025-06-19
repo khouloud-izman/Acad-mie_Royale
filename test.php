@@ -12,7 +12,6 @@ if (isset($_GET['formation_id']) && is_numeric($_GET['formation_id'])) {
   die("Formation non spécifiée ou invalide.");
 }
 
-
 // Récupérer infos formation (titre, niveau)
 $sql_formation = "SELECT titre, niveau FROM formation WHERE formation_id = ?";
 $stmt_formation = $pdo->prepare($sql_formation);
@@ -35,7 +34,11 @@ if ($total == 0) {
 }
 
 // Page (numéro de question)
-$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+  $page = (int) $_GET['page'];
+} else {
+  $page = 1;
+}
 if ($page < 1 || $page > $total) {
     header("Location: test.php?formation_id=$formation_id&page=1");
     exit;
