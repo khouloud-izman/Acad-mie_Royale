@@ -53,7 +53,7 @@ $tentatives_restantes = $max_tentatives - $tentative;
 
     <div class="card">
         <h1><i class="bi bi-exclamation-triangle-fill" style="color: orange;"></i> Résultat insuffisant</h1>
-
+        
         <p>Vous avez obtenu un score en dessous de <strong class="red">50%</strong></p>
         <p>Ne vous découragez pas ! Chaque erreur est une occasion d’apprendre.</p>
         <p>Prenez le temps de consolider vos connaissances,<br>puis retentez le test lorsque vous vous sentirez prêt(e)</p>

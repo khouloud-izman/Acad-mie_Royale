@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connecter'])) {
         $stmt = $pdo->prepare($query);
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+      
         if ($user && password_verify($pass, $user['mot_de_passe'])) {
             $_SESSION['user_id'] = $user['utilisateur_id'];
             $_SESSION['user_prenom'] = $user['prenom'];
@@ -81,7 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['connecter'])) {
         <h2>Connexion</h2>
       </div>
 
-      <form class="form-side" action="login.php<?php if (isset($_GET['redirect'])) echo '?redirect=' . htmlspecialchars($_GET['redirect']); ?>" method="post">
+<form class="form-side" action="<?php 
+  echo 'login.php' . (isset($_GET['redirect']) ? '?redirect=' . htmlspecialchars($_GET['redirect']) : ''); 
+?>" method="post">
         <span style="color:red;font-weight: bold;"><?= $erroremail ?></span><br>
         <input type="email" name="email" placeholder="Entrez votre Adresse e-mail" value="<?= htmlspecialchars($email) ?>"><br><br>
 

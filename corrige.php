@@ -20,19 +20,20 @@ $reponses = $_SESSION['reponses'][$formation_id];
 
 // 3. Récupérer les bonnes réponses depuis la base
 $stmt = $pdo->prepare("
-    SELECT q.question_id, c.choix_id
-    FROM question q
-    JOIN choix c ON c.question_id = q.question_id
-    WHERE q.formation_id = ? AND c.est_correct = 1
+    SELECT question.question_id, choix.choix_id
+    FROM question
+    JOIN choix ON choix.question_id = question.question_id
+    WHERE question.formation_id = ? AND choix.est_correct = 1
 ");
+
 $stmt->execute([$formation_id]);
 $bonnes_reponses = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
 
 // 4. Calcul du score
 $total = count($bonnes_reponses);
 $score = 0;
-foreach ($bonnes_reponses as $questionId => $correct_id) {
-    if (isset($reponses[$questionId]) && $reponses[$questionId] == $correct_id) {
+foreach ($bonnes_reponses as $questionId => $correct_choix_id) {
+    if (isset($reponses[$questionId]) && $reponses[$questionId] == $correct_choix_id) {
         $score++;
     }
 }
@@ -79,7 +80,7 @@ $pourcentage = round(($score / $total) * 100);
         $stmt_current = $pdo->prepare("SELECT progression FROM utilisateur WHERE utilisateur_id = ?");
         $stmt_current->execute([$utilisateur_id]);
         $current = (int)$stmt_current->fetchColumn();
-    
+        
         //  Si la nouvelle progression est supérieure à l'ancienne, la mettre à jour
         if ($new_progress > $current) {
             $stmt_update_progress = $pdo->prepare("UPDATE utilisateur SET progression = ? WHERE utilisateur_id = ?");

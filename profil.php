@@ -16,10 +16,7 @@ $stmt->execute([$utilisateur_id]);
 $progress = (int)$stmt->fetchColumn();
 
 // 2. Vérifier le nombre total de formations
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM formation");
-$stmt->execute();
-$totalFormations = (int)$stmt->fetchColumn();
-
+$totalFormations = (int)$pdo->query("SELECT COUNT(*) FROM formation")->fetchColumn();
 // 3. Vérifier combien de tests l'utilisateur a réussis (score >= 50)
 $stmt = $pdo->prepare("
     SELECT COUNT(DISTINCT formation_id) 
@@ -50,7 +47,7 @@ $certificat_disponible = ($progress === 100 && $tests_reussis === $totalFormatio
             <a class="certificat-btn" href="certificat.php"><i class="fa-solid fa-file" style="font-size: 30px; color: white;"></i>
  Afficher mon certificat</a>
         <?php else: ?>
-            <a class="certificat-btn disabled" onclick="alert('Vous devez terminer toutes les formations et réussir les tests pour télécharger le certificat.')" style="cursor:not-allowed; opacity:0.5;"> <i class="fa-solid fa-file" style="font-size: 30px; color: white;"></i>Afficher mon certificat</a>
+            <a class="certificat-btn disabled" onclick="alert('Vous devez terminer toutes les formations et réussir les tests pour Afficher le certificat.')" style="cursor:not-allowed; opacity:0.5;"> <i class="fa-solid fa-file" style="font-size: 30px; color: white;"></i>Afficher mon certificat</a>
         <?php endif; ?>
         <?php include("includes/header.php"); ?>
 
