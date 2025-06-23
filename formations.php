@@ -12,7 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id']; // Récupère l'ID de l'utilisateur connecté
-$tests_quit = $_SESSION['tests_quit'] ?? []; // Récupère les tests abandonnés (s'ils existent dans la session)
 
 // Récupération de toutes les formations depuis la base de données
 $stmt = $pdo->query('SELECT * FROM formation');
